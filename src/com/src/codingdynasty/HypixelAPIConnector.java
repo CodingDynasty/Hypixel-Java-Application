@@ -25,7 +25,7 @@ import com.src.codingdynasty.utils.WallsStats;
 public class HypixelAPIConnector {
 
 	private static final String PROFILE_URL = "https://api.hypixel.net/";
-	private static final String APIKey = "a98f936c-9d03-4ac3-b08d-e88e3918bb04";
+	private static final String APIKey = "APIKey Here!!!!";
 	private static final JSONParser jsonParser = new JSONParser();
 	public static ArrayList<String> friends = new ArrayList<String>();
 	public static String guildId = "";
