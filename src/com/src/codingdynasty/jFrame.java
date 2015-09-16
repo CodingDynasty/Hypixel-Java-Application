@@ -1,5 +1,6 @@
 package com.src.codingdynasty;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -38,7 +39,7 @@ import com.src.codingdynasty.utils.WallsStats;
 public class jFrame extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 874714946478418251L;
-	public static String version = "Alpha v1.1";
+	public static String version = "Alpha v1.2";
 
 	public static String playerName;
 	public static UUID playerUUID;
@@ -57,7 +58,6 @@ public class jFrame extends JFrame implements ActionListener {
 	JLabel sword = new JLabel();
 
 	Container c = getContentPane();
-	Container outLine = getContentPane();
 	
 	JPanel info = new JPanel(new GridLayout(1, 1));
 	JPanel stats = new JPanel(new GridLayout(1, 4));
@@ -76,6 +76,26 @@ public class jFrame extends JFrame implements ActionListener {
 	JPanel GuildOver = new JPanel(new GridLayout(2, 1));
 	JPanel FriendsShow = new JPanel(new GridLayout(1, 1));
 
+	public void doBackgroundColors(){
+		name.setBackground(new Color(210,180,140));
+		info.setBackground(new Color(210,180,140));
+		stats.setBackground(new Color(210,180,140));
+		button.setBackground(new Color(210,180,140));
+		statsButtons.setBackground(new Color(139,119,101));
+		gameStatsSection.setBackground(new Color(139,119,101));
+		SkywarsStatsShow.setBackground(new Color(139,119,101));
+		MegaStatsShow.setBackground(new Color(139,119,101));
+		WallsStatsShow.setBackground(new Color(139,119,101));
+		PaintballStatsShow.setBackground(new Color(139,119,101));
+		BlitzStatsShow.setBackground(new Color(139,119,101));
+		CSGOStatsShow.setBackground(new Color(139,119,101));
+		ArenaStatsShow.setBackground(new Color(139,119,101));
+		BoostersStatsShow.setBackground(new Color(139,119,101));
+		GuildOver.setBackground(new Color(139,119,101));
+		GuildShow.setBackground(new Color(139,119,101));
+		FriendsShow.setBackground(new Color(139,119,101));		
+	}
+	
 	JButton Skywars = new JButton("Skywars");
 	JButton Mega = new JButton("Mega Walls");
 	JButton Walls = new JButton("Walls");
@@ -98,13 +118,14 @@ public class jFrame extends JFrame implements ActionListener {
 
 		@SuppressWarnings("unused")
 		jFrame jFrame = new jFrame();
-		
 	}
 	
 	public jFrame() throws IOException {
-
 		super("Hypixel Java Application | " + version);
-
+		
+		doIconImage();
+		doBackgroundColors();
+		
 		setDefaultCloseOperation(3);
 		add(name);
 		getImage();
@@ -116,7 +137,6 @@ public class jFrame extends JFrame implements ActionListener {
 		this.name.add(Submit);
 		this.name.setAlignmentX(Component.CENTER_ALIGNMENT);
 		this.name.setAlignmentY(Component.CENTER_ALIGNMENT);
-
 	
 		this.c.add(name);
 
@@ -315,10 +335,26 @@ public class jFrame extends JFrame implements ActionListener {
 		stats.removeAll();
 		
 		stats.add(new JLabel(new ImageIcon(playerHead)));
-		stats.add("Center",new JLabel("<html>UserName: [" + PlayerUtils.rank + "] " + playerName + "<br>UUID: " + playerUUID + "</html>"));
-		stats.add("Center",new JLabel("<html>Network Level: " + PlayerUtils.Level + "<br>Network Exp: " + PlayerUtils.NetworkExp + "</html>"));
-		stats.add("Center",new JLabel("<html>Karma: " + PlayerUtils.karma + "</html>"));
-		
+		if(PlayerUtils.rank.equalsIgnoreCase("VIP")){
+			stats.add("Center",new JLabel("<html>UserName: <font color=rgb(50,255,50)>[" + PlayerUtils.rank + "] " + playerName + "</font><br>UUID: <font color=rgb(50,255,50)>" + playerUUID + "</font></html>"));
+		}else if(PlayerUtils.rank.equalsIgnoreCase("VIP_PLUS")){
+			stats.add("Center",new JLabel("<html>UserName: <font color=rgb(50,255,50)>[VIP</font><font color=red>+</font><font color=rgb(50,255,50)>] " + playerName + "</font><br>UUID: <font color=rgb(50,255,50)>" + playerUUID + "</font></html>"));
+		}else if(PlayerUtils.rank.equalsIgnoreCase("MVP")){
+			stats.add("Center",new JLabel("<html>UserName: <font color=rgb(0,255,255)>[MVP] " + playerName + "</font><br>UUID: <font color=rgb(0,255,255)>" + playerUUID + "</font></html>"));
+		}else if(PlayerUtils.rank.equalsIgnoreCase("MVP_PLUS")){
+			stats.add("Center",new JLabel("<html>UserName: <font color=rgb(0,255,255)>[MVP</font><font color=red>+</font><font color=rgb(0,255,255)>] " + playerName + "</font><br>UUID: <font color=rgb(50,255,50)>" + playerUUID + "</font></html>"));
+		}else if(PlayerUtils.rank.equalsIgnoreCase("HELPER")){
+			stats.add("Center",new JLabel("<html>UserName: <font color=blue>[Helper] " + playerName + "</font><br>UUID: <font color=blue>" + playerUUID + "</font></html>"));
+		}else if(PlayerUtils.rank.equalsIgnoreCase("Moderator")){
+			stats.add("Center",new JLabel("<html>UserName: <font color=rgb(0,200,0)>[Mod] " + playerName + "</font><br>UUID: <font color=rgb(0,200,0)>" + playerUUID + "</font></html>"));
+		}else if(PlayerUtils.rank.equalsIgnoreCase("Admin")){
+			stats.add("Center",new JLabel("<html>UserName: <font color=red>[Admin] " + playerName + "</font><br>UUID: <font color=red>" + playerUUID + "</font></html>"));
+		}else{
+			stats.add("Center",new JLabel("<html>UserName: [" + PlayerUtils.rank + "] " + playerName + "<br>UUID: " + playerUUID + "</html>"));
+		}
+		stats.add("Center",new JLabel("<html>Network Level: <font color=rgb(50,255,50)>" + PlayerUtils.Level + "</font><br>Network Exp: <font color=rgb(50,255,50)>" + PlayerUtils.NetworkExp + "</font></html>"));
+		stats.add("Center",new JLabel("<html>Karma: <font color=rgb(186,85,211)>" + PlayerUtils.karma + "</font></html>"));
+
 		button.removeAll();
 		
 		button.add(seeStat, SwingConstants.CENTER);
@@ -732,6 +768,16 @@ public class jFrame extends JFrame implements ActionListener {
 		MCGO.addActionListener(this);
 		Arena.addActionListener(this);
 		back.addActionListener(this);
+	}
+	
+	public void doIconImage(){
+		   Image im = null;
+		    try {
+		    im = ImageIO.read(getClass().getResource("/HypixelSheild.png"));
+		    } catch (IOException ex) {
+		    	ex.printStackTrace();
+		    }
+		    setIconImage(im);
 	}
 
 }
