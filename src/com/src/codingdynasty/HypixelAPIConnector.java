@@ -225,7 +225,12 @@ public class HypixelAPIConnector {
 					JSONObject getId = (JSONObject) jsonParser.parse(myString);
 					JSONObject player = (JSONObject) getId.get("player");
 					JSONObject stats = (JSONObject) player.get("stats");
-					JSONObject Skywars = (JSONObject) stats.get("SkyWars");
+					JSONObject Skywars = null;
+					if(stats != null){
+					Skywars = (JSONObject) stats.get("SkyWars");
+					}else{
+						return "";
+					}
 					if (Skywars != null) {
 						Long overallKills = (Long) Skywars.get("kills");
 						Long overallDeaths = (Long) Skywars.get("deaths");

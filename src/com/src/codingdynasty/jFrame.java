@@ -39,7 +39,7 @@ import com.src.codingdynasty.utils.WallsStats;
 public class jFrame extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 874714946478418251L;
-	public static String version = "Alpha v1.2";
+	public static String version = "Alpha v1.2.1";
 
 	public static String playerName;
 	public static UUID playerUUID;
@@ -349,9 +349,12 @@ public class jFrame extends JFrame implements ActionListener {
 			stats.add("Center",new JLabel("<html>UserName: <font color=rgb(0,200,0)>[Mod] " + playerName + "</font><br>UUID: <font color=rgb(0,200,0)>" + playerUUID + "</font></html>"));
 		}else if(PlayerUtils.rank.equalsIgnoreCase("Admin")){
 			stats.add("Center",new JLabel("<html>UserName: <font color=red>[Admin] " + playerName + "</font><br>UUID: <font color=red>" + playerUUID + "</font></html>"));
+		}else if(PlayerUtils.rank.equalsIgnoreCase("Youtuber")){
+			stats.add("Center",new JLabel("<html>UserName: <font color=#FFDE00>[YT] " + playerName + "</font><br>UUID: <font color=#FFDE00>" + playerUUID + "</font></html>"));
 		}else{
 			stats.add("Center",new JLabel("<html>UserName: [" + PlayerUtils.rank + "] " + playerName + "<br>UUID: " + playerUUID + "</html>"));
 		}
+		
 		stats.add("Center",new JLabel("<html>Network Level: <font color=rgb(50,255,50)>" + PlayerUtils.Level + "</font><br>Network Exp: <font color=rgb(50,255,50)>" + PlayerUtils.NetworkExp + "</font></html>"));
 		stats.add("Center",new JLabel("<html>Karma: <font color=rgb(186,85,211)>" + PlayerUtils.karma + "</font></html>"));
 
@@ -491,8 +494,19 @@ public class jFrame extends JFrame implements ActionListener {
 		BlitzStatsShow.add(new JLabel("Deaths: " + HungerGamesStats.deaths, SwingConstants.CENTER));
 		BlitzStatsShow.add(new JLabel("Wins: " + HungerGamesStats.wins, SwingConstants.CENTER));
 		BlitzStatsShow.add(new JLabel("Coins: " + HungerGamesStats.coins, SwingConstants.CENTER));
-		BlitzStatsShow.add(new JLabel("Current Aura: " + HungerGamesStats.aura.replace("_", " "), SwingConstants.CENTER));
-		BlitzStatsShow.add(new JLabel("Current Taunt: " + HungerGamesStats.taunt.replace("_", " "), SwingConstants.CENTER));
+		String p = null;
+		if(HungerGamesStats.aura != null){
+			p = HungerGamesStats.aura.replace("_", " ");
+		}else{
+			p = "No Aura";
+		}
+		BlitzStatsShow.add(new JLabel("Current Aura: " + p, SwingConstants.CENTER));
+		if(HungerGamesStats.taunt != null){
+			p = HungerGamesStats.taunt.replace("_", " ");
+		}else{
+			p = "No Taunt";
+		}
+		BlitzStatsShow.add(new JLabel("Current Taunt: " + p, SwingConstants.CENTER));
 		
 		gameStatsSection.add(BlitzStatsShow);
 		gameStatsSection.add(back);
