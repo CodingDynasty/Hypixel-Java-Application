@@ -12,5 +12,6 @@ public class GuildUtils {
 	public static Long memberSizeLevel = 0l;
 	public static Long overallCoins = 0l;
 	public static Long bankLevel = 0l;
+	public static boolean hasGuild = false;
 
 }

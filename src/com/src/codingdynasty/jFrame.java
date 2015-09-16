@@ -39,7 +39,7 @@ import com.src.codingdynasty.utils.WallsStats;
 public class jFrame extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 874714946478418251L;
-	public static String version = "Alpha v1.2.1";
+	public static String version = "Alpha v1.2.4";
 
 	public static String playerName;
 	public static UUID playerUUID;
@@ -212,11 +212,22 @@ public class jFrame extends JFrame implements ActionListener {
 		}
 		
 		if(e.getSource().equals(seeGuild)){
-			
+			if(GuildUtils.hasGuild){
 			makeGuildLayout();
 			mainMenu = false;
 			guildMenu = true;
-			
+			}else{
+				try {
+					ImageIcon ico = new ImageIcon(getClass().getResource(
+							"/HypixelSheild.png"));
+					Image o = ico.getImage().getScaledInstance(40, 40,
+							Image.SCALE_SMOOTH);
+					ImageIcon sheild = new ImageIcon(o);
+						JOptionPane.showMessageDialog(c, "You are not in a Guild!", "You're not in a guild!", 0, sheild);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
 		}
 		if(e.getSource().equals(seeFriends)){
 			
@@ -342,7 +353,7 @@ public class jFrame extends JFrame implements ActionListener {
 		}else if(PlayerUtils.rank.equalsIgnoreCase("MVP")){
 			stats.add("Center",new JLabel("<html>UserName: <font color=rgb(0,255,255)>[MVP] " + playerName + "</font><br>UUID: <font color=rgb(0,255,255)>" + playerUUID + "</font></html>"));
 		}else if(PlayerUtils.rank.equalsIgnoreCase("MVP_PLUS")){
-			stats.add("Center",new JLabel("<html>UserName: <font color=rgb(0,255,255)>[MVP</font><font color=red>+</font><font color=rgb(0,255,255)>] " + playerName + "</font><br>UUID: <font color=rgb(50,255,50)>" + playerUUID + "</font></html>"));
+			stats.add("Center",new JLabel("<html>UserName: <font color=rgb(0,255,255)>[MVP</font><font color=red>+</font><font color=rgb(0,255,255)>] " + playerName + "</font><br>UUID: <font color=rgb(0,255,255)>" + playerUUID + "</font></html>"));
 		}else if(PlayerUtils.rank.equalsIgnoreCase("HELPER")){
 			stats.add("Center",new JLabel("<html>UserName: <font color=blue>[Helper] " + playerName + "</font><br>UUID: <font color=blue>" + playerUUID + "</font></html>"));
 		}else if(PlayerUtils.rank.equalsIgnoreCase("Moderator")){
@@ -712,8 +723,9 @@ public class jFrame extends JFrame implements ActionListener {
 		for(String s : GuildUtils.players){
 			playerList.append(" [" + GuildUtils.guildRanks.get(s) + "] " + s).append(",");
 		}
+		if(playerList.toString().contains(",")){
 		playerList.deleteCharAt(playerList.lastIndexOf(","));
-		
+		}
 		GuildShow.add(new JLabel("Guild Name: " + GuildUtils.guildName));
 		GuildShow.add(new JLabel("Member Size Level: " + GuildUtils.memberSizeLevel));
 		GuildShow.add(new JLabel("Current Coins: " + GuildUtils.guildCoins));
