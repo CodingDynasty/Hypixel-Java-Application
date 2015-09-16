@@ -38,7 +38,7 @@ import com.src.codingdynasty.utils.WallsStats;
 public class jFrame extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 874714946478418251L;
-	public static String version = "Alpha v1.0";
+	public static String version = "Alpha v1.1";
 
 	public static String playerName;
 	public static UUID playerUUID;
